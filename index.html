@@ -1,1 +1,156 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#40251d">
+  <meta name="description" content="Consulta el menú de Cafetería Central, elige tus platillos y realiza tu pedido.">
+  <title>Cafetería Central | Tu pausa favorita</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="#inicio">
+      <span class="brand-icon">☕</span>
+      <span>CAFETERÍA <strong>CENTRAL</strong></span>
+    </a>
+
+    <nav class="navigation">
+      <a href="#inicio">Inicio</a>
+      <a href="#menu">Menú</a>
+      <a href="#pedido">Mi pedido</a>
+      <a href="#seguimiento">Seguimiento</a>
+    </nav>
+
+    <button class="cart-button" id="open-cart" aria-label="Abrir carrito">
+      🛒 <span>Carrito</span> <b id="cart-count">0</b>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <span class="eyebrow">HECHO CON AMOR, SERVIDO CON SABOR</span>
+        <h1>Tu pausa favorita<br>del día <span>☕</span></h1>
+        <p>
+          Café recién preparado, platillos irresistibles
+          y momentos que saben mejor juntos.
+        </p>
+        <a href="#menu" class="primary-button">Descubrir el menú ↗</a>
+        <div class="hero-note">✦ Ingredientes seleccionados · Sabor casero</div>
+      </div>
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=85"
+          alt="Café recién preparado sobre una mesa"
+        >
+        <div class="image-label">Un momento para ti <span>♥</span></div>
+      </div>
+      <div class="hero-decoration">CC.</div>
+    </section>
+
+    <section class="menu-section section" id="menu">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ALGO DELICIOSO TE ESPERA</span>
+          <h2>Nuestro menú</h2>
+          <p>Elige tus favoritos y nosotros nos encargamos del sabor.</p>
+        </div>
+        <div class="search-box">
+          <span>⌕</span>
+          <input id="search" type="search" placeholder="Buscar platillo..." aria-label="Buscar platillo">
+        </div>
+      </div>
+
+      <div class="categories" id="categories">
+        <button class="category active" data-category="Todos">✨ Todo</button>
+        <button class="category" data-category="Cafés">☕ Cafés</button>
+        <button class="category" data-category="Desayunos">🍳 Desayunos</button>
+        <button class="category" data-category="Comidas">🍔 Comidas</button>
+        <button class="category" data-category="Postres">🍰 Postres</button>
+        <button class="category" data-category="Bebidas">🥤 Bebidas</button>
+      </div>
+
+      <div class="product-grid" id="product-grid"></div>
+      <p class="empty-message" id="empty-message" hidden>No encontramos productos. Prueba otra búsqueda.</p>
+    </section>
+
+    <section class="promo section">
+      <div>
+        <span class="eyebrow">UN DETALLE PARA TI</span>
+        <h2>Los pequeños descansos<br>merecen un gran café.</h2>
+        <p>Encuentra tu nuevo favorito en nuestro menú.</p>
+        <a href="#menu" class="light-button">Elegir mis favoritos →</a>
+      </div>
+      <div class="promo-emoji" aria-hidden="true">☕</div>
+    </section>
+
+    <section class="order-section section" id="pedido">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">FÁCIL, RÁPIDO Y DELICIOSO</span>
+          <h2>Finaliza tu pedido</h2>
+          <p>Revisa tu carrito y completa tus datos.</p>
+        </div>
+      </div>
+
+      <div class="checkout-layout">
+        <div class="panel">
+          <h3>🛍️ Tu selección</h3>
+          <div id="cart-items">
+            <p class="muted">Tu carrito está vacío. ¡Elige algo rico!</p>
+          </div>
+          <div class="total-row">
+            <span>Total</span>
+            <strong id="cart-total">$0.00</strong>
+          </div>
+        </div>
+
+        <form class="panel checkout-form" id="checkout-form">
+          <h3>📝 Datos del pedido</h3>
+          <label for="customer-name">Nombre del cliente</label>
+          <input id="customer-name" name="name" required maxlength="80" placeholder="Escribe tu nombre">
+
+          <label for="customer-phone">Teléfono de contacto</label>
+          <input id="customer-phone" name="phone" type="tel" required maxlength="20" placeholder="Tu teléfono">
+
+          <label for="order-notes">Indicaciones (opcional)</label>
+          <textarea id="order-notes" name="notes" maxlength="300" placeholder="Ej. Sin azúcar, sin cebolla..."></textarea>
+
+          <button type="submit" class="primary-button full-button">Confirmar pedido →</button>
+          <p class="form-note">Demostración: el pedido se guarda en este navegador, no se envía a la cafetería.</p>
+        </form>
+      </div>
+      <div id="order-result" class="order-result" role="status" hidden></div>
+    </section>
+
+    <section class="tracking-section section" id="seguimiento">
+      <div class="tracking-card">
+        <span class="eyebrow">SIEMPRE SABRÁS DÓNDE ESTÁ</span>
+        <h2>¿Cómo va tu pedido?</h2>
+        <p>Ingresa el folio que recibiste al confirmar tu pedido.</p>
+        <form id="tracking-form" class="tracking-form">
+          <input id="tracking-code" required placeholder="Ej. CC-123456" aria-label="Folio del pedido">
+          <button class="primary-button" type="submit">Consultar estado</button>
+        </form>
+        <div id="tracking-result" role="status" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="#inicio">☕ CAFETERÍA CENTRAL</a>
+    <p>Preparado con cariño, disfrutado contigo.</p>
+    <p>© <span id="year"></span> Cafetería Central</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
